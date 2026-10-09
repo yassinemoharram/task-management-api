@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,5 +62,25 @@ public class TaskController {
         tasks.add(task);
 
         return task;
+    }
+
+
+    @PutMapping("/tasks/{id}")
+    public Task updateTask(@PathVariable Long id, @RequestBody Task updatedTask) {
+
+        for (Task task : tasks) {
+
+            if (task.getId().equals(id)) {
+                task.setTitle(updatedTask.getTitle());
+                task.setDescription(updatedTask.getDescription());
+                task.setStatus(updatedTask.getStatus());
+                task.setDueDate(updatedTask.getDueDate());
+
+                return task;
+            }
+        }
+    
+
+        return null;
     }
 }
