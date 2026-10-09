@@ -4,6 +4,8 @@ import com.yassine.taskmanagementapi.model.Task;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,5 +51,15 @@ public class TaskController {
         }
 
         return null;
+    }
+
+    @PostMapping("/tasks")
+    public Task createTask(@RequestBody Task task) {
+
+        task.setId((long) (tasks.size() + 1));
+
+        tasks.add(task);
+
+        return task;
     }
 }
